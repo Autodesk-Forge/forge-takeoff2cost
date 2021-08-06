@@ -93,8 +93,14 @@ function prepareUserHubsTree() {
       'types': {
           'default': { 'icon': 'glyphicon glyphicon-question-sign' },
           '#': { 'icon': 'glyphicon glyphicon-user' },
+          'hubs': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/a360hub.png' },
+          'personalHub': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/a360hub.png' },
           'bim360Hubs': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/bim360hub.png' },
           'bim360projects': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/bim360project.png' },
+          'a360projects': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/a360project.png' },
+          'packages': { 'icon': 'glyphicon glyphicon-briefcase' },
+          'takeoffitems': { 'icon': 'glyphicon glyphicon-tasks' },
+          'bim360documents': { 'icon': 'glyphicon glyphicon-file' },
           'unsupported': { 'icon': 'glyphicon glyphicon-ban-circle' }
       },
       "sort": function (a, b) {
@@ -111,20 +117,31 @@ function prepareUserHubsTree() {
       },
       "plugins": ["types", "state", "sort"],
       "state": { "key": "sourceHubs" }// key restore tree state
-  }).on('select_node.jstree', function(evt, data){
-    if (data != null && data.node != null && (data.node.type == 'bim360projects' )) {
-      $('#labelProjectHref').text(data.node.id);
-      $('#labelCostContainer').text(data.node.original.cost_container);
-
-      // create the cost table when project is selected.
-      if( costTable != null ){
-        delete costTable;
-        costTable = null;
+  }).on("select_node.jstree", async function (evt, data) {
+    if (data != null && data.node != null && (data.node.type == 'packages')) {
+      const instanceTree = $('#sourceHubs').jstree(true);
+      for (const parentNode in data.node.parents) {
+        const currentNode = instanceTree.get_node(data.node.parents[parentNode]);
+        if (currentNode.type === "bim360projects") {
+          $('#labelProjectHref').text(currentNode.id);
+          $('#labelCostContainer').text(currentNode.original.cost_container);
+          break;
+        }
       }
-      costTable = new CostTable('#budgetsTable', data.node.original.cost_container, data.node.id, CostDataType.BUDGET);
-      $('#btnRefresh').click();
+      // caculate the package cost
+      if (costMgrInstance != null) {
+        $('.clsInProgress').show();
+        $('.clsResult').hide();
+        await costMgrInstance.refreshPackageCost(data.node.id);
+        $('.clsInProgress').hide();
+        $('.clsResult').show();
+      }
     }
-  }); 
+    if (data != null && data.node != null && (data.node.type == 'takeoffitems')) {
+      let params = data.node.id.split('.');
+      launchViewer(params[0], parseInt(params[params.length - 1]));
+    }
+  });
 }
 
 function showUser() {

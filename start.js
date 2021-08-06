@@ -38,7 +38,9 @@ app.use(express.json({ limit: '50mb' }));
 app.use('/api/forge', require('./routes/oauth'));
 app.use('/api/forge', require('./routes/datamanagement'));
 app.use('/api/forge', require('./routes/user'));
-app.use('/api/forge', require('./routes/bim.cost'));
+app.use('/api/forge', require('./routes/acc.takeoff.cost'));
+app.use('/api/forge', require('./routes/pricebook'));
+
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(err.statusCode).json(err);

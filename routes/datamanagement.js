@@ -15,12 +15,20 @@
 // DOES NOT WARRANT THAT THE OPERATION OF THE PROGRAM WILL BE
 // UNINTERRUPTED OR ERROR FREE.
 /////////////////////////////////////////////////////////////////////
+'use strict';   
 
+const { OAuth } = require('./common/oauthImp');
 const express = require('express');
-const { HubsApi, ProjectsApi, FoldersApi, ItemsApi } = require('forge-apis');
 
-const { OAuth } = require('./common/oauth');
+const { 
+    getPackages, 
+    getTakeoffItems
+ } = require('./common/bimTakeoffImp');
 
+const { 
+    getHubs,
+    getProjects,
+} = require('./common/datamanagementImp');
 
 let router = express.Router();
 
@@ -43,57 +51,24 @@ router.get('/datamanagement', async (req, res) => {
         const params = href.split('/');
         const resourceName = params[params.length - 2];
         const resourceId = params[params.length - 1];
-        if (resourceName === 'hubs') {
-            getProjects(resourceId, oauth.getClient(), internalToken, res);
+        switch (resourceName) {
+            case 'hubs': {
+                getProjects(resourceId, oauth.getClient(), internalToken, res);
+                break;
+            }
+            case 'projects':{
+                const projectId = resourceId.split('b.').join('');
+                getPackages( projectId, internalToken, res );
+                break;
+            }
+            case 'packages':{
+                const projectId = params[params.length - 3];
+                getTakeoffItems(projectId, resourceId, internalToken, res);
+                break;
+            }
         }
     }
 });
 
-async function getHubs(oauthClient, credentials, res) {
-    const hubs = new HubsApi();
-    const data = await hubs.getHubs({}, oauthClient, credentials);
-    const treeNodes = (data.body.data.map((hub) => {
-        if (hub.attributes.extension.type !== 'hubs:autodesk.bim360:Account')
-            return null;
-        else {
-            return createTreeNode(
-                hub.links.self.href,
-                hub.attributes.name,
-                'bim360Hubs',
-                '',
-                true
-            );
-        }
-    }));
-    res.json(treeNodes.filter(node => node !== null));
-}
-
-async function getProjects(hubId, oauthClient, credentials, res) {
-    const projects = new ProjectsApi();
-    const data = await projects.getHubProjects(hubId, {}, oauthClient, credentials);
-    res.json(data.body.data.map((project) => {
-        let projectType = 'projects';
-        switch (project.attributes.extension.type) {
-            case 'projects:autodesk.core:Project':
-                projectType = 'a360projects';
-                break;
-            case 'projects:autodesk.bim360:Project':
-                projectType = 'bim360projects';
-                break;
-        }
-        return createTreeNode(
-            project.links.self.href,
-            project.attributes.name,
-            projectType,
-            project.relationships.cost.data.id,
-            false
-        );
-    }));
-}
-
-// Format data for tree
-function createTreeNode(_id, _text, _type, _cost_container, _children) {
-    return { id: _id, text: _text, type: _type, cost_container:_cost_container, children: _children };
-}
 
 module.exports = router;

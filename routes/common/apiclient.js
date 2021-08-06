@@ -95,8 +95,16 @@ function apiClientCallAsync( requestMethod, url,  access_token, body=null ){
     });    
 }
 
+
+
+// Format data for tree
+function createTreeNode(_id, _text, _type, _cost_container, _children, _storage = null) {
+    return { id: _id, text: _text, type: _type, cost_container: _cost_container, children: _children, storage: _storage };
+}
+
 module.exports = 
 { 
+    createTreeNode,
     apiClientCallAsync
 };
     

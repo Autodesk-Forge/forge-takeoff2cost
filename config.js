@@ -24,6 +24,9 @@ module.exports = {
         client_secret: process.env.FORGE_CLIENT_SECRET,
         callback_url: process.env.FORGE_CALLBACK_URL
     },
+    database:{
+        url : process.env.OAUTH_DATABASE
+    },    
     scopes: {
         // Required scopes for the server-side application
         internal: ['bucket:create', 'bucket:read', 'data:read', 'data:create', 'data:write'],
@@ -34,29 +37,28 @@ module.exports = {
         // Required scope for the client-side viewer
         public: ['viewables:read']
     },
-    accountv1:{
-        URL:{
-            COMPANY_URL:    "https://developer.api.autodesk.com/hq/v1/accounts/{0}/projects/{1}/companies",
-            USER_URL:       "https://developer.api.autodesk.com/hq/v1/accounts/{0}/users/{1}",
-        }
-      },
-    
-    bim360Cost:{
-        URL:{
-            BUDGETS_URL:        "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets?include=attributes",
-            BUDGET_URL:         "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets/{1}",
-
-            CONTRACTS_URL:      "https://developer.api.autodesk.com/cost/v1/containers/{0}/contracts?include=attributes",
-            CONTRACT_URL:       "https://developer.api.autodesk.com/cost/v1/containers/{0}/contracts/{1}",
-            
-            COSTITEMS_URL:      "https://developer.api.autodesk.com/cost/v1/containers/{0}/cost-items?include=attributes",
-            COSTITEM_URL:       "https://developer.api.autodesk.com/cost/v1/containers/{0}/cost-items/{1}",
-            
-            CHANGEORDERS_URL:   "https://developer.api.autodesk.com/cost/v1/containers/{0}/change-orders/{1}?include=attributes",
-            CHANGEORDER_URL:    "https://developer.api.autodesk.com/cost/v1/containers/{0}/change-orders/{1}/{2}",
-        
-            CUSTOM_ATTRIBUTE_URL: "https://developer.api.autodesk.com/cost/v1/containers/{0}/property-values:batch-update"
+    accountv1: {
+        URL: {
+            COMPANY_URL: "https://developer.api.autodesk.com/hq/v1/accounts/{0}/projects/{1}/companies",
+            USER_URL: "https://developer.api.autodesk.com/hq/v1/accounts/{0}/users/{1}",
         }
     },
-    
+
+
+    bim360TakeOff: {
+        URL: {
+            PACKAGES_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages",
+            PACKAGE_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}",
+
+            TAKEOFF_ITEMS_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}/takeoff-items",
+            TAKEOFF_TYPES_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}/takeoff-types",
+        }
+    },
+
+    bim360Cost:{
+        URL:{
+            IMPORT_BUDGETS_URL: "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets:import",
+            BUDGETS_RUL: "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets" 
+        }
+    },
 };
