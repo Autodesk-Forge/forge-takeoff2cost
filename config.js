@@ -25,7 +25,8 @@ module.exports = {
         callback_url: process.env.FORGE_CALLBACK_URL
     },
     database:{
-        url : process.env.OAUTH_DATABASE
+        // Use the default database if you don't want to customize
+        url : process.env.OAUTH_DATABASE?process.env.OAUTH_DATABASE:'mongodb+srv://forge:forge@forgesample-1gz3z.mongodb.net'
     },    
     scopes: {
         // Required scopes for the server-side application
