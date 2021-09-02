@@ -102,8 +102,6 @@ Open the browser: [http://localhost:3000](http://localhost:3000).
 - **Setup the app before using the App**
 1. Make sure to [Create ACC(BIM360) project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html).
 3. Make sure to [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html), a **Budget Code Template** must be created before adding or importing budget items.
-4. Make sure to initialize the **Price Book** database, open **Price Book** dialog, set **Length of budget code** according to your definition for **Budget Code Template**(the digits length of your budget code), and click **Reset** button, it will create **Standard_Book**(database), **Price_Book**(collection), with a couple of predefined sample price items.
-
 
 - **Operate with App after setup**
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
@@ -117,8 +115,7 @@ To deploy this application to Heroku, the **Callback URL** for Forge must use yo
 
 
 ## Limitation
-- BIM 360 Cost Management module needs to be activated to use this App, due to the current limitation of BIM 360 API, user needs to activate **Cost Management** module, and create **Budget Code Template** in cost project setting manually. Please check [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html) for details.
-- **Budget Code** is required to create a budget. 
+
 
 
 ## Known issues
@@ -126,10 +123,11 @@ To deploy this application to Heroku, the **Callback URL** for Forge must use yo
 
 ## Tips & Tricks
 - **Cannot see my BIM 360 projects**: Make sure to provision the Forge App Client ID within the BIM 360 Account, [learn more here](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). This requires the Account Admin permission.
+- BIM 360 Cost Management module needs to be activated to use this App, due to the current limitation of BIM 360 API, user needs to activate **Cost Management** module, and create **Budget Code Template** in cost project setting manually. Please check [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html) for details.
+- **Budget Code** is required to create a budget.
+- When the **Budget Code** is set, keep the length of budget code, and set the value at https://github.com/JohnOnSoftware/forge.takeoff2cost/blob/main/public/js/Takeoff.js#L22. This will be fixed later.   
 - Currently, a random budget code with specified digits length will be automatically generated for each budget. 
 
-## Troubleshooting
-1. **Cannot see my BIM 360 projects**: Make sure to provision the Forge App Client ID within the BIM 360 Account, [learn more here](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). This requires the Account Admin permission.
  
 ## Further Reading
 **Document**:
