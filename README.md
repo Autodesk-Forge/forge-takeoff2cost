@@ -22,11 +22,11 @@ The sample also provides the ability to import the generated budgets directly in
 ![thumbnail](/thumbnail.png)  
 
 ## Demonstration
-[![https://youtu.be/X6mFX_yqhTI](http://img.youtube.com/vi/X6mFX_yqhTI/0.jpg)](https://youtu.be/X6mFX_yqhTI "Display and exchange BIM 360 cost information with CSV file")
+TBD
 
 
 ## Live Demo
-[https://acct-akeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
+TBD: [https://acct-akeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
 
 
 # Web App Setup
