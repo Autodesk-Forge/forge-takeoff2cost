@@ -20,7 +20,7 @@
 const { createTreeNode, apiClientCallAsync } = require('./apiclient');
 var config = require('../../config'); 
 
-const { base64encode } = require('nodejs-base64');
+const base64url = require('base64url');
 
 ///////////////////////////////////////////////////////////////////////
 ///
@@ -77,7 +77,7 @@ async function getTakeoffItems( projectId, packageId, token, res){
             }
         }
         return createTreeNode(
-            base64encode(encodeURI(item.contentView.version))+'.'+item.id+'.'+item.objectId,
+            base64url(item.contentView.version)+'.'+item.id+'.'+item.objectId,
             item.objectName? typeName+'- '+item.objectName : typeName+'- '+item.type,
             "takeoffitems",
             null,

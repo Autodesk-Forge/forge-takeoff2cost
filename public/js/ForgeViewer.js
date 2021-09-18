@@ -25,8 +25,8 @@ function launchViewer(urn, object_id) {
 
 
   var options = {
-    env: 'FluentProduction',
-    api: 'fluent',
+    env: 'AutodeskProduction2',
+    api: 'streamingV2',
     getAccessToken
   };
 
@@ -34,7 +34,7 @@ function launchViewer(urn, object_id) {
   Autodesk.Viewing.Initializer(options, function onInitialized() {
     viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'));
     viewer.start();
-    var documentId = 'urn:' + urn.replace('/', '_');
+    var documentId = 'urn:' + urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
   });
 }
