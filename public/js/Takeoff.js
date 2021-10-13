@@ -18,8 +18,6 @@
 
 
 var costMgrInstance = null;
-// the budget code length in cost setting
-const budget_code_length = 8;
 
 ///////////////////////////////////////////////////////////////////////
 /// Class to handle PriceBook database
@@ -146,14 +144,14 @@ class PackageTakeoffTable {
   }
 
 
-  getBudgetList() {
+  getBudgetList(budgetCodeLength ) {
     var budgetData = [];
     if (this.table !== null) {
       this.table.data().toArray().forEach((budgetItem) => {
         const item = {
           parentId: null,
           name: budgetItem[0],
-          code: makeBudgetCode(budget_code_length),
+          code: makeBudgetCode(budgetCodeLength),
           quantity: parseInt(budgetItem[1]),
           unit: budgetItem[2],
           unitPrice: budgetItem[3],
@@ -203,7 +201,7 @@ class PackageCostManager {
       console.error(err);
       return false;
     }
-
+ 
     let result = null;
     const takeoffItemsUrl = '/api/forge/takeoff/' + encodeURIComponent(params[0]) + '/packages/'+ encodeURIComponent(params[params.length-1])+'/items';
     try {
@@ -256,14 +254,32 @@ class PackageCostManager {
     if (!this.packageTable)
       return false;
 
-    const budgetData = this.packageTable.getBudgetList();
+    let result = null;
+    const costContainerId = $('#labelCostContainer').text();
+    const costBudgetCodeTemplateUrl = '/api/forge/cost/' + costContainerId + '/budgetcode';
+    try {
+      result = await apiClientAsync(costBudgetCodeTemplateUrl);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to access Cost product, please make sure cost is activated, and budget code template is setup.");
+      return false;
+    }
+    let budgetCodeLength = 0;
+    for (const seg of result.segments) {
+      budgetCodeLength += seg.length;
+    }
+    if( budgetCodeLength == 0){
+      alert("Cost budget code template does not set, please setup budget template first.");
+      return false;
+    }
+
+    const budgetData = this.packageTable.getBudgetList(budgetCodeLength);
     const budgetBody = {
       data: budgetData,
       append: false
     }
 
-    const costContainerId = $('#labelCostContainer').text();
-    const requestUrl = '/api/forge/da4revit/bim360/budgets';
+    const requestUrl = '/api/forge/cost/budgets';
     const requestBody = {
       cost_container_id: costContainerId,
       data: budgetBody

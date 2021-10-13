@@ -23,13 +23,11 @@ function launchViewer(urn, object_id) {
   objectIds = [];
   objectIds.push( object_id);
 
-
   var options = {
     env: 'AutodeskProduction2',
     api: 'streamingV2',
     getAccessToken
   };
-
 
   Autodesk.Viewing.Initializer(options, function onInitialized() {
     viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'));
@@ -38,6 +36,7 @@ function launchViewer(urn, object_id) {
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
   });
 }
+
 
 function onDocumentLoadSuccess(doc) {
   var viewables = doc.getRoot().getDefaultGeometry();
@@ -48,6 +47,7 @@ function onDocumentLoadSuccess(doc) {
     viewer.fitToView(objectIds);
   });
 }
+
 
 function onDocumentLoadFailure(viewerErrorCode) {
   console.error('onDocumentLoadFailure() - errorCode:' + viewerErrorCode);

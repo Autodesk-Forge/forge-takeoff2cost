@@ -64,7 +64,7 @@ router.get('/takeoff/:project_id/packages/:package_id/items', async function(req
       }));
   }
 
-  const takeoffItemsUrl = config.bim360TakeOff.URL.TAKEOFF_ITEMS_URL.format(projectId, packageId);
+  const takeoffItemsUrl = config.url.takeoff.TAKEOFF_ITEMS_URL.format(projectId, packageId);
   let result = null;
   try {
     result = await apiClientCallAsync('GET', takeoffItemsUrl, req.oauth_token.access_token);
@@ -91,7 +91,7 @@ router.get('/takeoff/:project_id/packages/:package_id/types', async function(req
       }));
   }
 
-  const requestUrl = config.bim360TakeOff.URL.TAKEOFF_TYPES_URL.format(projectId, packageId);
+  const requestUrl = config.url.takeoff.TAKEOFF_TYPES_URL.format(projectId, packageId);
   let result = null;
   try {
     result = await apiClientCallAsync('GET', requestUrl, req.oauth_token.access_token);
@@ -105,12 +105,40 @@ router.get('/takeoff/:project_id/packages/:package_id/types', async function(req
 })
 
 
+// /////////////////////////////////////////////////////////////////////
+// / Get budget code template
+// /////////////////////////////////////////////////////////////////////
+router.get('/cost/:container_id/budgetcode', async( req, res, next)=>{
+  const containerId = req.params.container_id;
+  if ( containerId == '') {
+      return (res.status(400).json({
+          diagnostic: 'Missing input parameters'
+      }));
+  }
+
+  const requestUrl = config.url.cost.BUDGETS_TEMPLATES.format(containerId);
+  let result = null;
+  try {
+    result = await apiClientCallAsync('GET', requestUrl, req.oauth_token.access_token);
+  } catch (err) {
+    console.error(err);
+    return (res.status(500).json({
+      diagnostic: 'Failed to get budget code template from ACC'
+    }));
+  }
+  console.log(result.body);
+  return (res.status(200).json(result.body[0]));
+})
+
+
+
+
 
 
 // /////////////////////////////////////////////////////////////////////
 // / Import budgets to ACC Cost module
 // /////////////////////////////////////////////////////////////////////
-router.post('/da4revit/bim360/budgets', async (req, res, next) => {
+router.post('/cost/budgets', async (req, res, next) => {
   const cost_container_id = req.body.cost_container_id;
   const budgetList  = req.body.data;
   if ( budgetList === '' ) {
@@ -118,7 +146,7 @@ router.post('/da4revit/bim360/budgets', async (req, res, next) => {
           diagnostic: 'Missing input body info'
       }));
   }
-  const importBudgetsUrl =  config.bim360Cost.URL.IMPORT_BUDGETS_URL.format(cost_container_id);
+  const importBudgetsUrl = config.url.cost.IMPORT_BUDGETS_URL.format(cost_container_id);
   let budgetsRes = null;
   try {
       budgetsRes = await apiClientCallAsync( 'POST',  importBudgetsUrl, req.oauth_token.access_token, budgetList);

@@ -38,28 +38,18 @@ module.exports = {
         // Required scope for the client-side viewer
         public: ['viewables:read']
     },
-    accountv1: {
-        URL: {
-            COMPANY_URL: "https://developer.api.autodesk.com/hq/v1/accounts/{0}/projects/{1}/companies",
-            USER_URL: "https://developer.api.autodesk.com/hq/v1/accounts/{0}/users/{1}",
-        }
-    },
 
-
-    bim360TakeOff: {
-        URL: {
-            PACKAGES_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages",
-            PACKAGE_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}",
-
+    url:{
+        takeoff:{
+            PACKAGES_URL:      "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages",
+            PACKAGE_URL:       "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}",
             TAKEOFF_ITEMS_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}/takeoff-items",
             TAKEOFF_TYPES_URL: "https://developer.api.autodesk.com/construction/takeoff/v1/projects/{0}/packages/{1}/takeoff-types",
-        }
-    },
-
-    bim360Cost:{
-        URL:{
+        },
+        cost:{
             IMPORT_BUDGETS_URL: "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets:import",
-            BUDGETS_RUL: "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets" 
+            BUDGETS_RUL:        "https://developer.api.autodesk.com/cost/v1/containers/{0}/budgets",
+            BUDGETS_TEMPLATES:  "https://developer.api.autodesk.com/cost/v1/containers/{0}/templates"
         }
     },
 };

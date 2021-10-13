@@ -27,7 +27,7 @@ const base64url = require('base64url');
 ///
 ///////////////////////////////////////////////////////////////////////
 async function getPackages( projectId, token, res){
-    const packagesUrl =  config.bim360TakeOff.URL.PACKAGES_URL.format(projectId);
+    const packagesUrl =  config.url.takeoff.PACKAGES_URL.format(projectId);
     let packagesRes = null;
     try {
         packagesRes = await apiClientCallAsync('GET', packagesUrl, token.access_token);
@@ -51,7 +51,7 @@ async function getPackages( projectId, token, res){
 ///
 ///////////////////////////////////////////////////////////////////////
 async function getTakeoffItems( projectId, packageId, token, res){    
-    const takeoffTypesUrl =  config.bim360TakeOff.URL.TAKEOFF_TYPES_URL.format(projectId, packageId);
+    const takeoffTypesUrl =  config.url.takeoff.TAKEOFF_TYPES_URL.format(projectId, packageId);
     var typesRes = null;
     try {
         typesRes = await apiClientCallAsync('GET', takeoffTypesUrl, token.access_token);
@@ -59,7 +59,7 @@ async function getTakeoffItems( projectId, packageId, token, res){
       console.error(err)
     }
 
-    const takeoffItemsUrl =  config.bim360TakeOff.URL.TAKEOFF_ITEMS_URL.format(projectId, packageId);
+    const takeoffItemsUrl =  config.url.takeoff.TAKEOFF_ITEMS_URL.format(projectId, packageId);
     let packagesRes = null;
     try {
         packagesRes = await apiClientCallAsync('GET', takeoffItemsUrl, token.access_token);
