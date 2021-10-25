@@ -107,13 +107,13 @@ Windows (use **PowerShell**)
 
 Open the browser: [http://localhost:3000](http://localhost:3000). 
 
-**Please watch the [Video](https://youtu.be/X6mFX_yqhTI) for the detail setup and usage, or follow the steps:**
+**Please follow the steps to setup the app:**
 
 - **Setup the app before using the App**
 1. Make sure to [Create ACC project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html).
 3. Make sure to [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html), a **Budget Code Template** must be created before adding or importing budget items.
 
-- **Operate with App after setup**
+- **Operate with App after setup, please watch the [Video](https://youtu.be/dkAdC8BMQRw) for the detail usage,** 
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
 2. Click `Send to ACC Cost`, it will import the generated budgets directly into ACC Cost Management module.
 
