@@ -5,7 +5,7 @@
 ![Platforms](https://img.shields.io/badge/Web-Windows%20%7C%20MacOS%20%7C%20Linux-lightgray.svg)
 [![Data-Management](https://img.shields.io/badge/Data%20Management-v1-green.svg)](http://developer.autodesk.com/)
 
-[![BIM-360](https://img.shields.io/badge/BIM%20360-v1-green.svg)](http://developer.autodesk.com/)
+[![ACC](https://img.shields.io/badge/ACC-v1-green.svg)](http://developer.autodesk.com/)
 [![Cost Management](https://img.shields.io/badge/Cost%20Management-v1-green.svg)](http://developer.autodesk.com/)
 [![Takeoff](https://img.shields.io/badge/Takeoff-v1%20beta-green.svg)](http://developer.autodesk.com/)
 
@@ -16,17 +16,18 @@
 ## Description
 This sample demostrates displaying package information from ACC takeoff product, and caculate the budget based on the quantity of takeoff items and price which is stored in database.
 
-The sample also provides the ability to import the generated budgets directly into ACC(BIM 360) Cost Management product.  
+The sample also provides the ability to import the generated budgets directly into ACC Cost Management.  
 
 ## Thumbnail
 ![thumbnail](/thumbnail.png)  
 
 ## Demonstration
-TBD
 
+
+[![https://youtu.be/dkAdC8BMQRw](http://img.youtube.com/vi/dkAdC8BMQRw/0.jpg)](http://www.youtube.com/watch?v=dkAdC8BMQRw "Export Takeoff packages to Cost as budgets")
 
 ## Live Demo
-TBD: [https://acct-akeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
+[https://acct-akeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
 
 
 # Web App Setup
@@ -34,8 +35,9 @@ TBD: [https://acct-akeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuap
 ## Prerequisites
 
 1. **Forge Account**: Learn how to create a Forge Account, activate subscription and create an app at [this tutorial](http://learnforge.autodesk.io/#/account/). 
-2. **ACC(BIM 360) Account**: must be Account Admin to add the app integration. [Learn about provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). 
-3. **ACC(BIM 360) Cost Management**: Create BIM 360 project, activate Cost Management module, setup project to create **Budget Code Template** for Cost Management according to [the guide](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html)
+2. **ACC Account**: must be Account Admin to add the app integration. [Learn about provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). 
+3. **ACC Takeoff**: Create ACC project, activate Takeoff module, get started with Autodesk Takeoff according to [the guide](https://help.autodesk.com/view/TAKEOFF/ENU/?guid=Getting_Started_Takeoff)
+4. **ACC Cost Management**: Create ACC project, activate Cost Management module, setup project to create **Budget Code Template** for Cost Management according to [the guide](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Income_Settings)
 4. **Node.js**: basic knowledge with [**Node.js**](https://nodejs.org/en/).
 5. **JavaScript** basic knowledge with **jQuery**
 6. **MongoDB**: noSQL database, learn more. Or use a online version via Mongo Altas (this is used on this sample)
@@ -62,9 +64,7 @@ Install the required packages using `npm install`.
 3. Whitelist the IP address to access the database, [see this tutorial](https://docs.atlas.mongodb.com/security-whitelist/). If the sample is running on Heroku, you'll need to open to all (IP `0.0.0.0/0`). 
 4. Create a new user to access the database, please keep the **user name** and **password** to be used in the following connection. 
 5. At this point, you can click **Connect** button to check your **connection string** to the MongoDB cluster, the connection string should be in the form like 
-`mongodb+srv://<username>:<password>@<clustername>-<njl8m>.mongodb.net`. 
-
-Please set environment variable `OAUTH_DATABASE` with your url. [Learn more here](https://docs.mongodb.com/manual/reference/connection-string/)
+`mongodb+srv://<username>:<password>@<clustername>-<njl8m>.mongodb.net`. Set environment variable `OAUTH_DATABASE` with your url in the following step. [Learn more here](https://docs.mongodb.com/manual/reference/connection-string/)
 
 There are several tools to view your database, [Robo 3T](https://robomongo.org/) (formerly Robomongo) is a free lightweight GUI that can be used. When it opens, follow instructions [here](https://www.datduh.com/blog/2017/7/26/how-to-connect-to-mongodb-atlas-using-robo-3t-robomongo) to connect to MongoDB Atlas.
 
@@ -93,6 +93,16 @@ Windows (use **Node.js command line** from Start menu)
 
     npm start
 
+Windows (use **PowerShell**)
+
+    npm install
+    $env:FORGE_CLIENT_ID="YOUR CLIENT ID FROM DEVELOPER PORTAL"
+    $env:FORGE_CLIENT_SECRET="YOUR CLIENT SECRET"
+    $env:FORGE_CALLBACK_URL="YOUR CALLBACK URL"
+    $env:OAUTH_DATABASE="mongodb+srv://<username>:<password>@<clustername>-<njl8m>.mongodb.net>>"
+    
+    npm start
+
 ## Using the app
 
 Open the browser: [http://localhost:3000](http://localhost:3000). 
@@ -100,12 +110,12 @@ Open the browser: [http://localhost:3000](http://localhost:3000).
 **Please watch the [Video](https://youtu.be/X6mFX_yqhTI) for the detail setup and usage, or follow the steps:**
 
 - **Setup the app before using the App**
-1. Make sure to [Create ACC(BIM360) project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html).
+1. Make sure to [Create ACC project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html).
 3. Make sure to [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html), a **Budget Code Template** must be created before adding or importing budget items.
 
 - **Operate with App after setup**
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
-2. Clike `Send to ACC Cost`, it will import the generated budgets directly into BIM 360 Cost Management module.
+2. Click `Send to ACC Cost`, it will import the generated budgets directly into ACC Cost Management module.
 
 ## Deployment
 
@@ -115,31 +125,31 @@ To deploy this application to Heroku, the **Callback URL** for Forge must use yo
 
 
 ## Limitation
-
-
-
-## Known issues
+- Takeoff item of 2D Sheet is not supported to be viewed in browser currently. Only takeoff item of 3D model is supported.
 
 
 ## Tips & Tricks
-- **Cannot see my BIM 360 projects**: Make sure to provision the Forge App Client ID within the BIM 360 Account, [learn more here](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). This requires the Account Admin permission.
-- BIM 360 Cost Management module needs to be activated to use this App, due to the current limitation of BIM 360 API, user needs to activate **Cost Management** module, and create **Budget Code Template** in cost project setting manually. Please check [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html) for details.
-- **Budget Code** is required to create a budget.
-- When the **Budget Code** is set, keep the length of budget code, and set the value at https://github.com/JohnOnSoftware/forge.takeoff2cost/blob/main/public/js/Takeoff.js#L22. This will be fixed later.   
-- Currently, a random budget code with specified digits length will be automatically generated for each budget. 
+- **Cannot see my ACC projects**: Make sure to provision the Forge App Client ID within the ACC Account to get access to document, ACC indeed uses BIM 360 Admin Settings, this requires the Account Admin permission.[learn more here](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). 
+
+- The sample requires a price database which is built based on MongoDB, you can create and configurate it according to the steps above, or you can use the default database for try.
+
+- ACC Cost Management module needs to be activated to use this App, user needs to activate **Cost Management** module, and create **Budget Code Template** in cost project setting manually. Please check [Budget Settings](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Income_Settings) for details.
+
+- **Budget Code** is required to create a budget, currently, a random budget code with specified digits length will be automatically generated for each budget. 
 
  
 ## Further Reading
 **Document**:
 - This sample is based on [Learn Forge Tutorial](https://github.com/Autodesk-Forge/learn.forge.viewhubmodels/tree/nodejs), please check details there about the basic framework if you are not familar. 
 - [Data Management API](https://developer.autodesk.com/en/docs/data/v2/overview/)
-- [BIM 360 API](https://developer.autodesk.com/en/docs/bim360/v1/overview/) and [App Provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps)
-- [ACC(BIM 360) Takeoff API](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/cost-management/)
-- [ACC(BIM 360) Cost Management API](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/cost-management/)
-- [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html)
+- [BIM 360 API](https://forge.autodesk.com/en/docs/bim360/v1/overview/) and [App Provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps)
+- [ACC API](https://forge.autodesk.com/en/docs/acc/v1/overview/)
+- [How to use ACC Takeoff](https://help.autodesk.com/view/TAKEOFF/ENU/?guid=Getting_Started_Takeoff)
+- [How to use ACC Cost Management](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Overview)
+
 
 **Tutorials**:
-- [View BIM 360 Models](http://learnforge.autodesk.io/#/tutorials/viewhubmodels)
+- [View ACC or BIM 360 Models](http://learnforge.autodesk.io/#/tutorials/viewhubmodels)
 
 **Blogs**:
 - [Forge Blog](https://forge.autodesk.com/categories/bim-360-api)
@@ -149,4 +159,4 @@ To deploy this application to Heroku, the **Callback URL** for Forge must use yo
 This sample is licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT). Please see the [LICENSE](LICENSE) file for full details.
 
 ## Written by
-Zhong Wu [@johnonsoftware](https://twitter.com/johnonsoftware), [Forge Partner Development](http://forge.autodesk.com)
+Zhong Wu [@johnonsoftware](https://twitter.com/johnonsoftware), [Developer Advocate and Support](http://forge.autodesk.com)
