@@ -27,7 +27,7 @@ The sample also provides the ability to import the generated budgets directly in
 [![https://youtu.be/dkAdC8BMQRw](http://img.youtube.com/vi/dkAdC8BMQRw/0.jpg)](http://www.youtube.com/watch?v=dkAdC8BMQRw "Export Takeoff packages to Cost as budgets")
 
 ## Live Demo
-[https://acct-akeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
+[https://acc-takeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
 
 
 # Web App Setup
