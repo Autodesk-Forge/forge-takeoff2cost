@@ -7,7 +7,7 @@
 
 [![ACC](https://img.shields.io/badge/ACC-v1-green.svg)](http://developer.autodesk.com/)
 [![Cost Management](https://img.shields.io/badge/Cost%20Management-v1-green.svg)](http://developer.autodesk.com/)
-[![Takeoff](https://img.shields.io/badge/Takeoff-v1%20beta-green.svg)](http://developer.autodesk.com/)
+[![Takeoff](https://img.shields.io/badge/Takeoff-v1-green.svg)](http://developer.autodesk.com/)
 
 [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 [![Level](https://img.shields.io/badge/Level-Intermediate-blue.svg)](http://developer.autodesk.com/)
@@ -65,6 +65,12 @@ Install the required packages using `npm install`.
 4. Create a new user to access the database, please keep the **user name** and **password** to be used in the following connection. 
 5. At this point, you can click **Connect** button to check your **connection string** to the MongoDB cluster, the connection string should be in the form like 
 `mongodb+srv://<username>:<password>@<clustername>-<njl8m>.mongodb.net`. Set environment variable `OAUTH_DATABASE` with your url in the following step. [Learn more here](https://docs.mongodb.com/manual/reference/connection-string/)
+6. Create a database named **PriceBook**, a collection named **DinningRoom**, then according to your takeoff types, add a couple of price item in the format of:
+{
+    "Type": "Door",
+    "Price": 836,
+    "Unit": "nr"
+}
 
 There are several tools to view your database, [Robo 3T](https://robomongo.org/) (formerly Robomongo) is a free lightweight GUI that can be used. When it opens, follow instructions [here](https://www.datduh.com/blog/2017/7/26/how-to-connect-to-mongodb-atlas-using-robo-3t-robomongo) to connect to MongoDB Atlas.
 
@@ -109,11 +115,10 @@ Open the browser: [http://localhost:3000](http://localhost:3000).
 
 **Please follow the steps to setup the app:**
 
-- **Setup the app before using the App**
 1. Make sure to [Create ACC project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html).
 3. Make sure to [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html), a **Budget Code Template** must be created before adding or importing budget items.
 
-- **Operate with App after setup, please watch the [Video](https://youtu.be/dkAdC8BMQRw) for the detail usage,** 
+**Operate with App after setup, please watch the [Video](https://youtu.be/dkAdC8BMQRw) for the detail usage** 
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
 2. Click `Send to ACC Cost`, it will import the generated budgets directly into ACC Cost Management module.
 
