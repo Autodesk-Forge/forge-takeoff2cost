@@ -7,16 +7,16 @@
 
 [![ACC](https://img.shields.io/badge/ACC-v1-green.svg)](http://developer.autodesk.com/)
 [![Cost Management](https://img.shields.io/badge/Cost%20Management-v1-green.svg)](http://developer.autodesk.com/)
-[![Takeoff](https://img.shields.io/badge/Takeoff-v1-green.svg)](http://developer.autodesk.com/)
+[![Autodesk Takeoff](https://img.shields.io/badge/Autodesk%20Takeoff-v1-green.svg)](http://developer.autodesk.com/)
 
 [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 [![Level](https://img.shields.io/badge/Level-Intermediate-blue.svg)](http://developer.autodesk.com/)
 
 
 ## Description
-This sample demostrates displaying package information from ACC takeoff product, and caculate the budget based on the quantity of takeoff items and price which is stored in database.
+This sample demostrates displaying package information from Autodesk Takeoff product, and caculate the budget based on the quantity of takeoff items and price which is stored in database.
 
-The sample also provides the ability to import the generated budgets directly into ACC Cost Management.  
+The sample also provides the ability to import the generated budgets directly into Cost Management.  
 
 ## Thumbnail
 ![thumbnail](/thumbnail.png)  
@@ -36,8 +36,8 @@ The sample also provides the ability to import the generated budgets directly in
 
 1. **Forge Account**: Learn how to create a Forge Account, activate subscription and create an app at [this tutorial](http://learnforge.autodesk.io/#/account/). 
 2. **ACC Account**: must be Account Admin to add the app integration. [Learn about provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). 
-3. **ACC Takeoff**: Create ACC project, activate Takeoff module, get started with Autodesk Takeoff according to [the guide](https://help.autodesk.com/view/TAKEOFF/ENU/?guid=Getting_Started_Takeoff)
-4. **ACC Cost Management**: Create ACC project, activate Cost Management module, setup project to create **Budget Code Template** for Cost Management according to [the guide](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Income_Settings)
+3. **Autodesk Takeoff**: Create ACC project, activate Takeoff, get started with Autodesk Takeoff according to [the guide](https://help.autodesk.com/view/TAKEOFF/ENU/?guid=Getting_Started_Takeoff)
+4. **Cost Management**: Create ACC project, activate Cost Management, setup project to create **Budget Code Template** for Cost Management according to [the guide](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Income_Settings)
 4. **Node.js**: basic knowledge with [**Node.js**](https://nodejs.org/en/).
 5. **JavaScript** basic knowledge with **jQuery**
 6. **MongoDB**: noSQL database, learn more. Or use a online version via Mongo Altas (this is used on this sample)
@@ -115,13 +115,13 @@ Open the browser: [http://localhost:3000](http://localhost:3000).
 
 **Please follow the steps to setup the app:**
 
-1. Make sure to [Create ACC project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/DOCS/ENU/?guid=Create_Project), a **Budget Code Template** must be created before adding or importing budget items.
+1. Make sure to [Create ACC project, activate Takeoff and Cost Management, setup project for Cost Management](https://help.autodesk.com/view/DOCS/ENU/?guid=Create_Project), a **Budget Code Template** must be created before adding or importing budget items.
 
-2. Work with takeoff module, upload 3D models or 2D Sheets, create a couple of packages, takeoff types and takeoff items.
+2. Work with Autodesk Takeoff, upload 3D models or 2D Sheets, create a couple of packages, takeoff types and takeoff items.
 
 **Operate with App after setup, please watch the [Video](https://youtu.be/dkAdC8BMQRw) for the detail usage** 
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
-2. Click `Send to ACC Cost`, it will import the generated budgets directly into ACC Cost Management module.
+2. Click `Send to ACC Cost`, it will import the generated budgets directly into Cost Management.
 
 ## Deployment
 
@@ -141,9 +141,9 @@ To deploy this application to Heroku, the **Callback URL** for Forge must use yo
 
 - Before using the app, user needs to activate and setup takeoff service, upload 3D models or 2D Sheets, create a couple of packages, takeoff types and takeoff items.
 
-- The sample requires a price database which is built based on MongoDB, you can create and configurate it according to the steps above, or you can use the default database for try.
+- The sample requires a price database which is built based on MongoDB, you can create and configurate it according to the steps above, or you can use the default database for a try.
 
-- ACC Cost Management module needs to be activated to use this App, user needs to activate **Cost Management** module, and create **Budget Code Template** in cost project setting manually. Please check [Budget Settings](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Income_Settings) for details.
+- User needs to activate **Cost Management**, and create **Budget Code Template** in cost project setting manually. Please check [Budget Settings](https://help.autodesk.com/view/BUILD/ENU/?guid=Cost_Income_Settings) for details.
 
 - **Budget Code** is required to create a budget, currently, a random budget code with specified digits length will be automatically generated for each budget. 
 
