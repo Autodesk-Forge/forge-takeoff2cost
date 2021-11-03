@@ -96,7 +96,8 @@ function prepareUserHubsTree() {
           'hubs': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/a360hub.png' },
           'personalHub': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/a360hub.png' },
           'bim360Hubs': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/bim360hub.png' },
-          'bim360projects': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/bim360project.png' },
+          'accprojects': { 'icon': './img/accproject.svg'},
+          'bim360projects': { 'icon': './img/bim360project.png' },
           'a360projects': { 'icon': 'https://github.com/Autodesk-Forge/bim360appstore-data.management-nodejs-transfer.storage/raw/master/www/img/a360project.png' },
           'packages': { 'icon': 'glyphicon glyphicon-briefcase' },
           'takeoffitems': { 'icon': 'glyphicon glyphicon-tasks' },
@@ -139,7 +140,12 @@ function prepareUserHubsTree() {
     }
     if (data != null && data.node != null && (data.node.type == 'takeoffitems')) {
       let params = data.node.id.split('.');
-      launchViewer(params[0], parseInt(params[params.length - 1]));
+      if(params[params.length - 1] != 'null'){
+        launchViewer(params[0], parseInt(params[params.length - 1]));
+      }
+      else{
+        alert("This takeoff item is connected to a 2D Sheet, not support to be viewed currently!")
+      }
     }
   });
 }

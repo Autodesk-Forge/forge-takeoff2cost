@@ -115,8 +115,9 @@ Open the browser: [http://localhost:3000](http://localhost:3000).
 
 **Please follow the steps to setup the app:**
 
-1. Make sure to [Create ACC project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html).
-3. Make sure to [Create BIM360 project, activate Cost Management module, setup project for Cost Management](https://help.autodesk.com/view/BIM360D/ENU/?guid=BIM360D_Cost_Management_getting_started_with_cost_management_html), a **Budget Code Template** must be created before adding or importing budget items.
+1. Make sure to [Create ACC project, activate Takeoff and Cost products, setup project for Cost Management](https://help.autodesk.com/view/DOCS/ENU/?guid=Create_Project), a **Budget Code Template** must be created before adding or importing budget items.
+
+2. Work with takeoff module, upload 3D models or 2D Sheets, create a couple of packages, takeoff types and takeoff items.
 
 **Operate with App after setup, please watch the [Video](https://youtu.be/dkAdC8BMQRw) for the detail usage** 
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
@@ -135,6 +136,10 @@ To deploy this application to Heroku, the **Callback URL** for Forge must use yo
 
 ## Tips & Tricks
 - **Cannot see my ACC projects**: Make sure to provision the Forge App Client ID within the ACC Account to get access to document, ACC indeed uses BIM 360 Admin Settings, this requires the Account Admin permission.[learn more here](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). 
+
+- Only ACC projects are listed, BIM 360 projects are not supported.
+
+- Before using the app, user needs to activate and setup takeoff service, upload 3D models or 2D Sheets, create a couple of packages, takeoff types and takeoff items.
 
 - The sample requires a price database which is built based on MongoDB, you can create and configurate it according to the steps above, or you can use the default database for try.
 

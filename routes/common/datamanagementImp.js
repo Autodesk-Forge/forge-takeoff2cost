@@ -51,14 +51,18 @@ async function getHubs(oauthClient, credentials, res) {
 async function getProjects(hubId, oauthClient, credentials, res) {
     const projects = new ProjectsApi();
     const data = await projects.getHubProjects(hubId, {}, oauthClient, credentials);
-    res.json(data.body.data.map((project) => {
+
+    const treeNodes = data.body.data.map((project) => {
         let projectType = 'projects';
         switch (project.attributes.extension.type) {
             case 'projects:autodesk.core:Project':
-                projectType = 'a360projects';
-                break;
+                return null;
             case 'projects:autodesk.bim360:Project':
-                projectType = 'bim360projects';
+                if(project.attributes.extension.data.projectType == 'ACC'){
+                    projectType = 'accprojects';  
+                }else{
+                    return null; 
+                }
                 break;
         }
         return createTreeNode(
@@ -68,7 +72,9 @@ async function getProjects(hubId, oauthClient, credentials, res) {
             project.relationships.cost.data.id,
             true
         );
-    }));
+    })
+    // only support ACC project
+    res.json(treeNodes.filter(node => node !== null));
 }
 
 module.exports = {
