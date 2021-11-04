@@ -1,4 +1,4 @@
-# forge-acc.takeoff2cost
+# forge-takeoff2cost
 
 [![Node.js](https://img.shields.io/badge/Node.js-8.0-blue.svg)](https://nodejs.org/)
 [![npm](https://img.shields.io/badge/npm-4.0-blue.svg)](https://www.npmjs.com/)
@@ -24,10 +24,10 @@ The sample also provides the ability to import the generated budgets directly in
 ## Demonstration
 
 
-[![https://youtu.be/dkAdC8BMQRw](http://img.youtube.com/vi/dkAdC8BMQRw/0.jpg)](http://www.youtube.com/watch?v=dkAdC8BMQRw "Export Takeoff packages to Cost as budgets")
+[![https://youtu.be/dkAdC8BMQRw](http://img.youtube.com/vi/dkAdC8BMQRw/0.jpg)](http://www.youtube.com/watch?v=dkAdC8BMQRw "Export Autodesk Takeoff packages to Cost as budgets")
 
 ## Live Demo
-[https://acc-takeoff2cost.herokuapp.com/](https://acc-takeoff2cost.herokuapp.com/)
+[https://forge-takeoff2cost.herokuapp.com/](https://forge-takeoff2cost.herokuapp.com/)
 
 
 # Web App Setup
@@ -51,7 +51,7 @@ Install [NodeJS](https://nodejs.org), version 8 or newer.
 
 Clone this project or download it (this `nodejs` branch only). It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
-    git clone https://github.com/Autodesk-Forge/forge.takeoff2cost
+    git clone https://github.com/Autodesk-Forge/forge-takeoff2cost
 
 Install the required packages using `npm install`.
 
@@ -121,17 +121,17 @@ Open the browser: [http://localhost:3000](http://localhost:3000).
 
 **Operate with App after setup, please watch the [Video](https://youtu.be/dkAdC8BMQRw) for the detail usage** 
 1. Select takeoff package under ACC project, it will generate the quantity info for each takeoff item, and calculate the budget based on the quantity and price which is stored in database as Price Book, then display you the result in table.
-2. Click `Send to ACC Cost`, it will import the generated budgets directly into Cost Management.
+2. Click `Send to Cost`, it will import the generated budgets directly into Cost Management.
 
 ## Deployment
 
 To deploy this application to Heroku, the **Callback URL** for Forge must use your `.herokuapp.com` address. After clicking on the button below, at the Heroku Create New App page, set your Client ID, Secret and Callback URL for Forge.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/forge.takeoff2cost)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/forge-takeoff2cost)
 
 
 ## Limitation
-- Takeoff item of 2D Sheet is not supported to be viewed in browser currently. Only takeoff item of 3D model is supported.
+- Only 3D model connected to takeoff item is supported to be viewed in Forge Viewer at this moment. The 2D Sheet which connected to takeoff item is not supported in this app, this is due to our known API limitation, the viewable information of 2D Sheet is not exposed from current API, this request is already passed to engineering team, let us know if this is an important requirement for your user case.  
 
 
 ## Tips & Tricks

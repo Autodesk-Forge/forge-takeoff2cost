@@ -1,7 +1,7 @@
 {
-  "name": "forge-acc.takeoff2cost",
-  "description": "ACC Takeoff to cost sample",
-  "repository": "https://github.com/Autodesk-Forge/forge.takeoff2cost",
+  "name": "forge-takeoff2cost",
+  "description": "Autodesk Takeoff to Cost Sample",
+  "repository": "https://github.com/Autodesk-Forge/forge-takeoff2cost",
   "logo": "https://avatars0.githubusercontent.com/u/8017462?v=3&s=200",
   "keywords": [
       "autodesk",
