@@ -14,7 +14,7 @@
 
 
 ## Description
-This sample demostrates displaying package information from Autodesk Takeoff product, and caculate the budget based on the quantity of takeoff items and price which is stored in database.
+This sample demonstrates displaying package information from Autodesk Takeoff product, and calculate the budget based on the quantity of takeoff items and price which is stored in database.
 
 The sample also provides the ability to import the generated budgets directly into Cost Management.  
 
